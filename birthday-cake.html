@@ -368,6 +368,75 @@
         line-height: 1.2;
       }
 
+      /* Desktop responsive styles - larger screens */
+      @media (min-width: 1024px) {
+        .text h1 {
+          font-size: 5em;
+          margin: 30px 0;
+          letter-spacing: 4px;
+        }
+        
+        .name {
+          font-size: 2.8rem !important;
+          margin: 25px 0 !important;
+          letter-spacing: 5px;
+        }
+        
+        #cake {
+          margin: -12em auto 0 auto;
+          width: 280px;
+          height: 700px;
+        }
+        
+        .instruction {
+          font-size: 1.8rem;
+          margin: 40px 20px;
+        }
+        
+        .from-signature {
+          bottom: 25px;
+          right: 100px;
+          font-size: 1.2rem;
+          padding: 12px 16px;
+        }
+        
+        .corner-decoration {
+          font-size: 3rem;
+        }
+        
+        .corner-decoration.top-left,
+        .corner-decoration.bottom-left {
+          left: 30px;
+        }
+        
+        .corner-decoration.top-right,
+        .corner-decoration.bottom-right {
+          right: 30px;
+        }
+        
+        .corner-decoration.top-left,
+        .corner-decoration.top-right {
+          top: 30px;
+        }
+        
+        .corner-decoration.bottom-left,
+        .corner-decoration.bottom-right {
+          bottom: 30px;
+        }
+        
+        .heart, .blossom {
+          font-size: 2rem;
+        }
+        
+        .star {
+          font-size: 1.5rem;
+        }
+        
+        .sparkle {
+          font-size: 1.2rem;
+        }
+      }
+
       /* Mobile responsive styles */
       @media (max-width: 768px) {
         .text h1 {
@@ -1044,7 +1113,7 @@
       </svg>
       
       <!-- Instruction text -->
-      <div class="instruction">� Nhấn vào bánh kem 🎂</div>
+      <div class="instruction">🎵 Nhấn vào bánh kem 🎂</div>
       
       <div class="text">
       <h1>🎉 Happy Birthday! 🎉</h1>
@@ -1088,7 +1157,7 @@
             console.log('🔇 Music stopped completely');
             
             // Update instruction text
-            document.querySelector('.instruction').innerHTML = '� Nhấn vào bánh kem 🎂';
+            document.querySelector('.instruction').innerHTML = '🎼 Nhấn vào bánh kem 🎂';
             document.querySelector('.instruction').style.color = '#9370DB';
             
             // Stop all musical effects
