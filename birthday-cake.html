@@ -228,11 +228,9 @@
         cursor: pointer;
         transition: all 0.3s ease;
         filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        touch-action: manipulation;
       }
 
-      #cake:hover, #cake:active {
+      #cake:hover {
         transform: scale(1.05) rotate(2deg);
         filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
       }
@@ -375,15 +373,6 @@
         max-width: 90%;
         box-sizing: border-box;
         word-wrap: break-word;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        touch-action: manipulation;
-        user-select: none;
-        -webkit-user-select: none;
-      }
-
-      .instruction:active {
-        transform: scale(0.98);
-        opacity: 0.8;
       }
 
       @keyframes pulse {
@@ -959,7 +948,7 @@
   </head>
   <body>
       <!-- Background music -->
-      <audio id="birthdayMusic" loop preload="metadata" playsinline>
+      <audio id="birthdayMusic" loop preload="auto">
         <source src="hpbd.mp3" type="audio/mpeg">
         <source src="hpbd.wav" type="audio/wav">
         <source src="hpbd.ogg" type="audio/ogg">
@@ -1172,128 +1161,47 @@
       </div>
 
       <script>
-        // Safari iOS audio fix - Initialize audio context
-        let audioContext;
-        let isAudioInitialized = false;
-        
-        // Initialize audio for Safari iOS
-        function initializeAudio() {
-          if (!isAudioInitialized) {
-            try {
-              // Create audio context for Safari
-              audioContext = new (window.AudioContext || window.webkitAudioContext)();
-              
-              // Resume audio context if suspended (Safari requirement)
-              if (audioContext.state === 'suspended') {
-                audioContext.resume().then(() => {
-                  console.log('🔊 Audio context resumed for Safari');
-                });
-              }
-              
-              isAudioInitialized = true;
-              console.log('🔊 Audio initialized for Safari iOS');
-            } catch (error) {
-              console.log('Audio context not supported:', error);
-            }
-          }
-        }
-        
         // Music control - Play only when cake is clicked
         const music = document.getElementById('birthdayMusic');
         let musicPlaying = false;
         
-        // Safari specific audio preparation
-        function prepareAudioForSafari() {
-          return new Promise((resolve) => {
-            // Load the audio
-            music.load();
-            
-            // Set volume
-            music.volume = 0.7; // Slightly lower for mobile
-            
-            // Add event listeners for Safari
-            music.addEventListener('canplaythrough', () => {
-              console.log('🎵 Audio can play through');
-              resolve();
-            }, { once: true });
-            
-            music.addEventListener('loadeddata', () => {
-              console.log('🎵 Audio data loaded');
-              resolve();
-            }, { once: true });
-            
-            // Fallback timeout
-            setTimeout(resolve, 1000);
-          });
-        }
-        
-        async function playBirthdayMusic() {
-          try {
-            // Initialize audio context for Safari
-            initializeAudio();
-            
-            // Prepare audio for Safari
-            await prepareAudioForSafari();
-            
-            // Reset to beginning
-            music.currentTime = 0;
-            
-            console.log('🎵 Attempting to play music...');
-            
-            const playPromise = music.play();
-            
-            if (playPromise !== undefined) {
-              await playPromise;
+        function playBirthdayMusic() {
+          music.volume = 0.8;
+          music.currentTime = 0;
+          
+          const playPromise = music.play();
+          
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
               console.log('🎵 Birthday music started playing!');
               musicPlaying = true;
-              
               // Update instruction text
               const instruction = document.querySelector('.instruction');
-              instruction.innerHTML = '🎵 Nhạc sinh nhật đang phát! Nhấn lại để dừng 🎂✨';
+              instruction.innerHTML = '🎵 Nhạc sinh nhật đang phát! 🎂✨';
               instruction.style.color = '#8A2BE2';
               
               // Start musical notes animation
               startMusicalNotes();
-              
-            }
-          } catch (error) {
-            console.log('❌ Failed to play music:', error);
-            
-            // Show error message to user
-            const instruction = document.querySelector('.instruction');
-            instruction.innerHTML = '⚠️ Không thể phát nhạc. Hãy thử bấm lại! 🎵';
-            instruction.style.color = '#FF6B6B';
-            
-            // Reset after 3 seconds
-            setTimeout(() => {
-              instruction.innerHTML = '🎵 Nhấn vào chiếc bánh kem để phát nhạc sinh nhật! 🎂';
-              instruction.style.color = '#9370DB';
-            }, 3000);
-          }
-        }
-        
-        function stopMusic() {
-          try {
-            music.pause();
-            music.currentTime = 0;
-            musicPlaying = false;
-            console.log('🔇 Music stopped completely');
-            
-            // Update instruction text
-            const instruction = document.querySelector('.instruction');
-            instruction.innerHTML = '🎵 Nhấn vào chiếc bánh kem để phát nhạc sinh nhật! 🎂';
-            instruction.style.color = '#9370DB';
-            
-            // Stop all musical effects
-            stopMusicalNotes();
-          } catch (error) {
-            console.log('Error stopping music:', error);
+            }).catch(error => {
+              console.log('Failed to play music:', error);
+            });
           }
         }
         
         function toggleMusic() {
           if (musicPlaying && !music.paused) {
-            stopMusic();
+            // Stop music completely
+            music.pause();
+            music.currentTime = 0; // Reset to beginning
+            musicPlaying = false;
+            console.log('🔇 Music stopped completely');
+            
+            // Update instruction text
+            document.querySelector('.instruction').innerHTML = '🎵 Nhấn vào chiếc bánh kem để phát nhạc sinh nhật! 🎂';
+            document.querySelector('.instruction').style.color = '#9370DB';
+            
+            // Stop all musical effects
+            stopMusicalNotes();
           } else {
             console.log('🎵 Starting music...');
             playBirthdayMusic();
@@ -1716,100 +1624,31 @@
         }
 
         // Add click event to cake - Toggle music and create sparkles
-        const cakeElement = document.getElementById('cake');
-        
-        // Mouse/touch event handler
-        function handleCakeInteraction(e) {
-          e.preventDefault(); // Prevent default behavior
+        document.getElementById('cake').addEventListener('click', function(e) {
+          const rect = e.target.getBoundingClientRect();
+          const x = e.clientX;
+          const y = e.clientY;
           
-          const rect = cakeElement.getBoundingClientRect();
-          const x = e.clientX || (e.touches && e.touches[0].clientX) || rect.left + rect.width/2;
-          const y = e.clientY || (e.touches && e.touches[0].clientY) || rect.top + rect.height/2;
+          console.log('🍰 Cake clicked! Toggling music and effects...');
           
-          console.log('🍰 Cake clicked/touched! Toggling music and effects...');
-          
-          // Toggle music
+          // Toggle music instead of just playing
           toggleMusic();
           
           // Create sparkle effect
           createSparkle(x, y);
-        }
-        
-        // Add both click and touch events for better mobile support
-        cakeElement.addEventListener('click', handleCakeInteraction);
-        cakeElement.addEventListener('touchstart', handleCakeInteraction, { passive: false });
+        });
 
         // Add click event to instruction text
-        const instructionElement = document.querySelector('.instruction');
-        
-        function handleInstructionInteraction(e) {
-          e.preventDefault();
-          console.log('📝 Instruction clicked/touched - toggling music...');
+        document.querySelector('.instruction').addEventListener('click', function() {
+          console.log('📝 Instruction clicked - toggling music...');
           toggleMusic();
-        }
-        
-        instructionElement.addEventListener('click', handleInstructionInteraction);
-        instructionElement.addEventListener('touchstart', handleInstructionInteraction, { passive: false });
-
-        // Initialize audio on first user interaction (Safari requirement)
-        document.addEventListener('touchstart', function initAudioOnTouch() {
-          initializeAudio();
-          // Remove this listener after first touch
-          document.removeEventListener('touchstart', initAudioOnTouch);
-        }, { once: true });
-
-        document.addEventListener('click', function initAudioOnClick() {
-          initializeAudio();
-          // Remove this listener after first click
-          document.removeEventListener('click', initAudioOnClick);
-        }, { once: true });
+        });
 
         // Test functions for debugging
         window.testPianoSheet = function() {
           console.log('🧪 Testing piano sheet creation...');
           createPianoSheet();
         };
-        
-        // Debug function for Safari
-        window.debugAudio = function() {
-          console.log('🔊 Audio Debug Info:');
-          console.log('Audio ready state:', music.readyState);
-          console.log('Audio can play:', music.canPlay);
-          console.log('Audio paused:', music.paused);
-          console.log('Audio current time:', music.currentTime);
-          console.log('Audio volume:', music.volume);
-          console.log('Audio initialized:', isAudioInitialized);
-          console.log('Music playing flag:', musicPlaying);
-          if (audioContext) {
-            console.log('Audio context state:', audioContext.state);
-          }
-        };
-        
-        // Prevent iOS Safari from zooming on double tap
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(event) {
-          const now = (new Date()).getTime();
-          if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
-          }
-          lastTouchEnd = now;
-        }, false);
-        
-        // Better error handling for audio
-        music.addEventListener('error', function(e) {
-          console.log('🚨 Audio error:', e);
-          const instruction = document.querySelector('.instruction');
-          instruction.innerHTML = '⚠️ Lỗi phát nhạc. Vui lòng thử lại! 🎵';
-          instruction.style.color = '#FF6B6B';
-        });
-        
-        music.addEventListener('stalled', function() {
-          console.log('🐌 Audio stalled');
-        });
-        
-        music.addEventListener('waiting', function() {
-          console.log('⏳ Audio waiting');
-        });
         
         // Start animations
         setInterval(createHeart, 800);
