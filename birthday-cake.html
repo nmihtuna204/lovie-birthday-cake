@@ -276,21 +276,31 @@
         width: 6.66666667px;
         height: 18px;
         filter: drop-shadow(0 0 10px rgba(255, 100, 0, 0.6));
+        /* Safari mobile fix */
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
       .fuego:nth-child(1) {
         animation: fuego 2s 6.5s infinite;
+        -webkit-animation: fuego 2s 6.5s infinite;
       }
       .fuego:nth-child(2) {
         animation: fuego 1.5s 6.5s infinite;
+        -webkit-animation: fuego 1.5s 6.5s infinite;
       }
       .fuego:nth-child(3) {
         animation: fuego 1s 6.5s infinite;
+        -webkit-animation: fuego 1s 6.5s infinite;
       }
       .fuego:nth-child(4) {
         animation: fuego 0.5s 6.5s infinite;
+        -webkit-animation: fuego 0.5s 6.5s infinite;
       }
       .fuego:nth-child(5) {
         animation: fuego 0.2s 6.5s infinite;
+        -webkit-animation: fuego 0.2s 6.5s infinite;
       }
 
       /* ============================================== Animation Fire
@@ -301,11 +311,28 @@
           background: linear-gradient(45deg, rgba(254, 248, 97, 0.8), rgba(255, 200, 50, 0.6));
           box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.4), 0 0 20px 5px rgba(255, 150, 0, 0.3);
           transform: translateY(0) scale(1);
+          -webkit-transform: translateY(0) scale(1);
         }
         50% {
           background: linear-gradient(45deg, rgba(255, 100, 0, 0.3), rgba(255, 50, 0, 0.1));
           box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2), 0 0 60px 15px rgba(255, 100, 0, 0.4);
           transform: translateY(-20px) scale(0);
+          -webkit-transform: translateY(-20px) scale(0);
+        }
+      }
+
+      @-webkit-keyframes fuego {
+        0%, 100% {
+          background: linear-gradient(45deg, rgba(254, 248, 97, 0.8), rgba(255, 200, 50, 0.6));
+          box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.4), 0 0 20px 5px rgba(255, 150, 0, 0.3);
+          transform: translateY(0) scale(1);
+          -webkit-transform: translateY(0) scale(1);
+        }
+        50% {
+          background: linear-gradient(45deg, rgba(255, 100, 0, 0.3), rgba(255, 50, 0, 0.1));
+          box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2), 0 0 60px 15px rgba(255, 100, 0, 0.4);
+          transform: translateY(-20px) scale(0);
+          -webkit-transform: translateY(-20px) scale(0);
         }
       }
 
@@ -1017,7 +1044,7 @@
       </svg>
       
       <!-- Instruction text -->
-      <div class="instruction">🎵 Nhấn vào chiếc bánh kem để phát nhạc sinh nhật! 🎂</div>
+      <div class="instruction">� Nhấn vào bánh kem 🎂</div>
       
       <div class="text">
       <h1>🎉 Happy Birthday! 🎉</h1>
@@ -1041,7 +1068,7 @@
               musicPlaying = true;
               // Update instruction text
               const instruction = document.querySelector('.instruction');
-              instruction.innerHTML = '🎵 Nhạc sinh nhật đang phát! Cảm ơn bạn! 🎂✨';
+              instruction.innerHTML = '🎵 Đang phát nhạc! 🎂✨';
               instruction.style.color = '#8A2BE2';
               
               // Start musical notes animation
@@ -1061,7 +1088,7 @@
             console.log('🔇 Music stopped completely');
             
             // Update instruction text
-            document.querySelector('.instruction').innerHTML = '🎵 Nhấn vào chiếc bánh kem để phát nhạc sinh nhật! 🎂';
+            document.querySelector('.instruction').innerHTML = '� Nhấn vào bánh kem 🎂';
             document.querySelector('.instruction').style.color = '#9370DB';
             
             // Stop all musical effects
