@@ -1,0 +1,56 @@
+{
+  "name": "Birthday Cake for Lovie",
+  "short_name": "Lovie Birthday",
+  "description": "Beautiful birthday cake website with piano sheet music animations",
+  "start_url": "./birthday-cake.html",
+  "display": "standalone",
+  "background_color": "#ffb3e6",
+  "theme_color": "#8e0038",
+  "orientation": "portrait-primary",
+  "categories": ["entertainment", "lifestyle"],
+  "lang": "vi",
+  "icons": [
+    {
+      "src": "image.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "image.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "image.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Birthday cake website homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Play Birthday Song",
+      "short_name": "Play Song",
+      "description": "Directly play the birthday song",
+      "url": "./birthday-cake.html?autoplay=true",
+      "icons": [
+        {
+          "src": "image.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "features": [
+    "Piano sheet music animations",
+    "Click-to-play birthday music", 
+    "Beautiful visual effects",
+    "Responsive design",
+    "Accessibility support"
+  ]
+}

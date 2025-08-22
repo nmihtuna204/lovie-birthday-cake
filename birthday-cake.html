@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Happy Birthday - Lovie 🎂</title>
+    <meta name="description" content="Beautiful birthday cake website with piano sheet music animations for Lovie">
+    <meta name="keywords" content="birthday, cake, music, piano, animation, lovie">
+    <meta name="author" content="The coding Wizard">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8e0038">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Lovie Birthday">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="image.png">
+    <link rel="apple-touch-icon" href="image.png">
+    
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');
       @import url(https://fonts.googleapis.com/css?family=Lato:300italic);
 
       html,
@@ -13,28 +32,207 @@
         height: 100%;
         scrollbar-width: none;
         overflow: hidden;
+        margin: 0;
+        padding: 0;
       }
 
       body {
-        background: #ee9ca7;
+        background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 25%, #fd79a8 50%, #e17055 75%, #a29bfe 100%);
+        position: relative;
+      }
+
+      /* Corner decorations */
+      .corner-decoration {
+        position: fixed;
+        font-size: 2rem;
+        z-index: 1000;
+        animation: bounce 2s infinite;
+      }
+
+      .corner-decoration.top-left {
+        top: 20px;
+        left: 20px;
+        animation-delay: 0s;
+      }
+
+      .corner-decoration.top-right {
+        top: 20px;
+        right: 20px;
+        animation-delay: 0.5s;
+      }
+
+      .corner-decoration.bottom-left {
+        bottom: 20px;
+        left: 20px;
+        animation-delay: 1s;
+      }
+
+      .corner-decoration.bottom-right {
+        bottom: 20px;
+        right: 20px;
+        animation-delay: 1.5s;
+      }
+
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0) scale(1);
+        }
+        40% {
+          transform: translateY(-20px) scale(1.1);
+        }
+        60% {
+          transform: translateY(-10px) scale(1.05);
+        }
+      }
+
+      /* Flying hearts */
+      .flying-hearts {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 1.5rem;
+        animation: flyUp 8s infinite linear;
+        opacity: 0.8;
+      }
+
+      @keyframes flyUp {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Falling cherry blossoms */
+      .falling-blossoms {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      .blossom {
+        position: absolute;
+        font-size: 1.2rem;
+        animation: fall 6s infinite linear;
+        opacity: 0.9;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-100px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Twinkling stars */
+      .stars {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      .star {
+        position: absolute;
+        font-size: 1rem;
+        animation: twinkle 3s infinite;
+        opacity: 0;
+      }
+
+      @keyframes twinkle {
+        0%, 100% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      /* Sparkle effect */
+      .sparkle {
+        position: absolute;
+        font-size: 0.8rem;
+        color: #ffd700;
+        animation: sparkleEffect 1s ease-out forwards;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      @keyframes sparkleEffect {
+        0% {
+          opacity: 1;
+          transform: scale(0) rotate(0deg);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5) rotate(180deg);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0) rotate(360deg);
+        }
       }
 
       .name{
-        font-size: 1.1rem;
-        font-weight: 600;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #00FFFF;
+        text-shadow: 
+          0 0 20px #00CED1,
+          0 0 40px #00FFFF,
+          0 0 60px #40E0D0,
+          2px 2px 4px rgba(0, 255, 255, 0.3);
+        filter: drop-shadow(0 4px 8px rgba(0, 206, 209, 0.5));
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+
+      @keyframes rainbowText {
+        0%, 100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
       }
 
       #cake {
         display: block;
         position: relative;
         margin: -10em auto 0 auto;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+      }
+
+      #cake:hover {
+        transform: scale(1.05) rotate(2deg);
+        filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
       }
 
       /* ============================================== Candle
       */
 
       .cake {
-        background: #ffffff;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
         border-radius: 10px;
         position: absolute;
         top: 228px;
@@ -46,14 +244,16 @@
         transform: translateY(-300px);
         backface-visibility: hidden;
         animation: in 500ms 6s ease-out forwards;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
       .cake:after,
       .cake:before {
-        background: rgba(255, 0, 0, 0.4);
+        background: linear-gradient(45deg, rgba(255, 0, 0, 0.6), rgba(255, 100, 100, 0.4));
         content: "";
         position: absolute;
         width: 100%;
         height: 2.22222222px;
+        box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3);
       }
       .cake:after {
         top: 25%;
@@ -75,6 +275,7 @@
         margin-left: -2.6px;
         width: 6.66666667px;
         height: 18px;
+        filter: drop-shadow(0 0 10px rgba(255, 100, 0, 0.6));
       }
       .fuego:nth-child(1) {
         animation: fuego 2s 6.5s infinite;
@@ -97,13 +298,13 @@
 
       @keyframes fuego {
         0%, 100% {
-          background: rgba(254, 248, 97, 0.5);
-          box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+          background: linear-gradient(45deg, rgba(254, 248, 97, 0.8), rgba(255, 200, 50, 0.6));
+          box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.4), 0 0 20px 5px rgba(255, 150, 0, 0.3);
           transform: translateY(0) scale(1);
         }
         50% {
-          background: rgba(255, 50, 0, 0.1);
-          box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+          background: linear-gradient(45deg, rgba(255, 100, 0, 0.3), rgba(255, 50, 0, 0.1));
+          box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2), 0 0 60px 15px rgba(255, 100, 0, 0.4);
           transform: translateY(-20px) scale(0);
         }
       }
@@ -116,17 +317,371 @@
 
       .text {
         color: #8b6a60;
-        font-family: 'Lato', sans-serif;
-        font-weight: 300;
-        font-style:italic;
+        font-family: 'Dancing Script', cursive;
+        font-weight: 700;
         text-align: center;
-        h1 {
-          font-size: 1.4em;
+        position: relative;
+        z-index: 100;
+      }
+      
+      .text h1 {
+        font-size: 3.5em;
+        margin: 20px 0;
+        color: #C71585;
+        font-weight: 900;
+        text-transform: uppercase;
+        text-align: center;
+        text-shadow: 
+          0 0 20px #FFD700,
+          0 0 35px #FFEF94,
+          0 0 50px #FFD700,
+          2px 2px 4px rgba(199, 21, 133, 0.3);
+        filter: drop-shadow(0 4px 8px rgba(199, 21, 133, 0.4));
+        letter-spacing: 2px;
+        line-height: 1.2;
+      }
+
+      .text p {
+        margin: 10px 0;
+        font-size: 1.8rem;
+      }
+
+      /* Instruction text */
+      .instruction {
+        text-align: center;
+        font-family: 'Dancing Script', cursive;
+        font-size: 1.2rem;
+        color: #9370DB;
+        font-weight: 400;
+        margin: 30px 0 10px 0;
+        text-shadow: 0 0 15px rgba(147, 112, 219, 0.5);
+        animation: pulse 2s infinite;
+        cursor: pointer;
+        opacity: 0.9;
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 0.8;
+          transform: scale(1);
         }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+      }
+
+      /* Musical notes animation */
+      .musical-notes {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        top: 0;
+        left: 0;
+      }
+
+      .music-note {
+        position: absolute;
+        font-size: 1.5rem;
+        opacity: 0;
+        color: #8e0038;
+        animation: floatNote 4s ease-out forwards;
+      }
+
+      @keyframes floatNote {
+        0% {
+          opacity: 0;
+          transform: translateY(0) translateX(0) rotate(0deg) scale(0.3);
+          filter: blur(1px);
+        }
+        15% {
+          opacity: 1;
+          transform: translateY(-30px) translateX(15px) rotate(30deg) scale(0.8);
+          filter: blur(0px);
+        }
+        30% {
+          opacity: 1;
+          transform: translateY(-60px) translateX(40px) rotate(90deg) scale(1.1);
+        }
+        45% {
+          opacity: 0.9;
+          transform: translateY(-90px) translateX(-10px) rotate(150deg) scale(1.3);
+        }
+        60% {
+          opacity: 0.8;
+          transform: translateY(-120px) translateX(25px) rotate(210deg) scale(1.1);
+        }
+        75% {
+          opacity: 0.6;
+          transform: translateY(-160px) translateX(50px) rotate(280deg) scale(0.9);
+        }
+        90% {
+          opacity: 0.3;
+          transform: translateY(-190px) translateX(10px) rotate(340deg) scale(0.7);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-220px) translateX(-15px) rotate(360deg) scale(0.3);
+          filter: blur(2px);
+        }
+      }
+
+      /* Musical wave effect */
+      .music-wave {
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        opacity: 0;
+        animation: waveFlow 3s ease-in-out forwards;
+      }
+
+      .music-wave svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      @keyframes waveFlow {
+        0% {
+          opacity: 1;
+          transform: translateY(0) scale(0.5);
+        }
+        50% {
+          opacity: 0.8;
+          transform: translateY(-80px) scale(1.2);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-160px) scale(0.8);
+        }
+      }
+
+      /* Long musical wave - horizontal flow */
+      .music-wave-long {
+        position: fixed;
+        width: 100vw;
+        height: 120px;
+        opacity: 1;
+        animation: longWaveFlow 6s ease-in-out forwards;
+        pointer-events: none;
+        z-index: 100;
+        top: 200px;
+        left: 0;
+      }
+
+      .music-wave-long svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      @keyframes longWaveFlow {
+        0% {
+          opacity: 0;
+          transform: translateX(-100%) translateY(0);
+        }
+        10% {
+          opacity: 1;
+        }
+        20% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(-10px);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(0%) translateY(-20px);
+        }
+        80% {
+          opacity: 1;
+          transform: translateX(20%) translateY(-30px);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(50%) translateY(-40px);
+        }
+      }
+
+      /* Flowing notes on the wave */
+      .wave-note {
+        position: absolute;
+        font-size: 1.2rem;
+        animation: noteFlow 5s linear forwards;
+        pointer-events: none;
+      }
+
+      @keyframes noteFlow {
+        0% {
+          opacity: 1;
+          transform: translateX(-50px) scale(0.8);
+        }
+        25% {
+          opacity: 1;
+          transform: translateX(25vw) scale(1.2) rotate(45deg);
+        }
+        50% {
+          opacity: 0.9;
+          transform: translateX(50vw) scale(1) rotate(90deg);
+        }
+        75% {
+          opacity: 0.8;
+          transform: translateX(75vw) scale(1.1) rotate(135deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(100vw) scale(0.8) rotate(180deg);
+        }
+      }
+
+      /* Piano sheet music staff */
+      .piano-sheet {
+        position: fixed;
+        opacity: 0;
+        animation: pianoSheetFlow 5s ease-in-out forwards;
+        pointer-events: none;
+        z-index: 95;
+      }
+
+      .piano-sheet svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      @keyframes pianoSheetFlow {
+        0% {
+          opacity: 0;
+          transform: translateX(-100%) translateY(0) scale(0.8);
+        }
+        15% {
+          opacity: 1;
+          transform: translateX(-20%) translateY(-5px) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(10%) translateY(-10px) scale(1.05);
+        }
+        85% {
+          opacity: 0.8;
+          transform: translateX(30%) translateY(-15px) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(100%) translateY(-20px) scale(0.8);
+        }
+      }
+
+      /* Notes on staff */
+      .staff-note {
+        position: fixed;
+        pointer-events: none;
+        z-index: 96;
+      }
+
+      @keyframes staffNoteMove {
+        0% {
+          opacity: 0;
+          transform: translateX(-10vw) translateY(0) scale(0.6) rotate(0deg);
+          filter: blur(2px);
+        }
+        15% {
+          opacity: 1;
+          transform: translateX(5vw) translateY(-8px) scale(1) rotate(5deg);
+          filter: blur(0px);
+        }
+        30% {
+          opacity: 1;
+          transform: translateX(25vw) translateY(-12px) scale(1.1) rotate(-3deg);
+        }
+        50% {
+          opacity: 0.95;
+          transform: translateX(45vw) translateY(-6px) scale(1.05) rotate(2deg);
+        }
+        70% {
+          opacity: 0.8;
+          transform: translateX(65vw) translateY(-15px) scale(1.1) rotate(-4deg);
+        }
+        85% {
+          opacity: 0.5;
+          transform: translateX(80vw) translateY(-10px) scale(0.9) rotate(1deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(100vw) translateY(-25px) scale(0.6) rotate(0deg);
+          filter: blur(1px);
+        }
+      }
+
+      /* Fade out animations for when music stops */
+      @keyframes fadeOutAndShrink {
+        0% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+          filter: blur(0px);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.8) translateY(-10px);
+          filter: blur(1px);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.3) translateY(-30px);
+          filter: blur(3px);
+        }
+      }
+
+      @keyframes fadeOutSlide {
+        0% {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+          filter: blur(0px);
+        }
+        50% {
+          opacity: 0.6;
+          transform: translateX(-20px) scale(0.9);
+          filter: blur(1px);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-50px) scale(0.5);
+          filter: blur(2px);
+        }
+      }
+
+      .fade-out-music {
+        animation: fadeOutAndShrink 1.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+      }
+
+      .fade-out-sheet {
+        animation: fadeOutSlide 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
       }
     </style>
   </head>
   <body>
+      <!-- Background music -->
+      <audio id="birthdayMusic" loop preload="auto">
+        <source src="hpbd.mp3" type="audio/mpeg">
+        <source src="hpbd.wav" type="audio/wav">
+        <source src="hpbd.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+      </audio>
+
+      <!-- Corner decorations -->
+      <div class="corner-decoration top-left">🌸</div>
+      <div class="corner-decoration top-right">💖</div>
+      <div class="corner-decoration bottom-left">⭐</div>
+      <div class="corner-decoration bottom-right">🎀</div>
+
+      <!-- Flying hearts -->
+      <div class="flying-hearts" id="flyingHearts"></div>
+
+      <!-- Falling blossoms -->
+      <div class="falling-blossoms" id="fallingBlossoms"></div>
+
+      <!-- Twinkling stars -->
+      <div class="stars" id="stars"></div>
+
+      <!-- Musical notes container -->
+      <div class="musical-notes" id="musicalNotes"></div>
       <div class="cake">
         <div class="fuego"></div>
         <div class="fuego"></div>
@@ -135,7 +690,25 @@
         <div class="fuego"></div>
       </div>
       <svg id="cake" version="1.1" x="0px" y="0px" width="200px" height="500px" viewBox="0 0 200 500" enable-background="new 0 0 200 500" xml:space="preserve">
-        <path fill="#a88679" d="M173.667-13.94c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
+        <!-- Gradient definitions -->
+        <defs>
+          <linearGradient id="cakeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffb3e6;stop-opacity:1" />
+            <stop offset="30%" style="stop-color:#ff99cc;stop-opacity:1" />
+            <stop offset="70%" style="stop-color:#ff66b8;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff80cc;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="creamGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#fff0f8;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#ffe6f2;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ffeef7;stop-opacity:1" />
+          </linearGradient>
+          <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="8" stdDeviation="4" flood-color="rgba(0,0,0,0.3)"/>
+          </filter>
+        </defs>
+        
+        <path fill="url(#cakeGradient)" filter="url(#shadow)" d="M173.667-13.94c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
         c44.697,0,96.586,0,147.334,0C177.667-29.942,177.668-13.94,173.667-13.94z">
             <animate id="bizcocho_3" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1" begin="relleno_2.end" dur="0.3s" fill="freeze" values="
                               M173.667-13.94c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
@@ -149,7 +722,7 @@
         c46.385,0,97.539,0,147.334,0C177.668,411.567,177.667,427.569,173.667,427.569z
                               " />
         </path>
-        <path fill="#8b6a60" d="M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
+        <path fill="#ff99cc" filter="url(#shadow)" d="M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
         c0,19.144,0,57.431,0,76.574c0,10.152,0,40.607,0,40.607c0,1.858-1.506,3.364-3.364,3.364l0,0c-1.858,0-3.364-1.506-3.364-3.364c0,0,0-30.455,0-40.607c0-19.144,0-57.432,0-76.575c0-11.057,0-44.226,0-44.226C96.636-177.015,98.142-178.521,100-178.521
         L100-178.521z">
             <animate id="relleno_2" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 0.58 1" begin="bizcocho_2.end" dur="0.5s" fill="freeze" values="
@@ -172,7 +745,7 @@
         c0,0-4.125-4.983,0-7.823c5.201-3.58,16.085,0,23.725,0c8.841,0,20.762,0,20.762,0c3.686,0,8.597,0,19.511,0H102.242z
                               " />
         </path>
-        <path fill="#a88679" d="M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
+        <path fill="url(#cakeGradient)" filter="url(#shadow)" d="M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
         c43.566,0,97.96,0,147.334,0C177.667-31.931,177.666-15.929,173.667-15.929z">
             <animate id="bizcocho_2" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0.25 0 0.58 1" begin="relleno_1.end" dur="0.5s" fill="freeze" values="
                               M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
@@ -188,7 +761,7 @@
         c44.697,0,96.586,0,147.334,0C177.667,435.392,177.668,451.394,173.667,451.394z
                               " />
         </path>
-        <path fill="#8b6a60" d="M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
+        <path fill="#ff99cc" filter="url(#shadow)" d="M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
         c0,1.753-2.958,1.847-2.958,0c0-12.68,0-16.277,0-30.401c0-21.983,0,11.66,0-8.305c0-13.027,0-15.992,0-28.628
         C98.411-75.883,101.368-75.592,101.368-73.685z">
             <animate id="relleno_1" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 0.6 1" begin="bizcocho_1.end" dur="0.5s" fill="freeze" values="
@@ -209,7 +782,7 @@
         c-4.109,0.65-3.01-10.006,0-10.006C37.129,451.394,149.379,451.394,173.667,451.394z
                               " />
         </path>
-        <path fill="#a88679" d="M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
+        <path fill="url(#cakeGradient)" filter="url(#shadow)" d="M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
         C177.668,5.569,177.667,21.571,173.667,21.571z">
             <animate id="bizcocho_1" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 1 1; 0.25 0 1 1; 0 0 1 1; 0.25 0 0.6 1" begin="2s" dur="0.8s" fill="freeze" values="
                               M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
@@ -234,7 +807,7 @@
         C177.667,459.569,177.666,475.571,173.667,475.571z
                               " />
         </path>
-        <path fill="#fefae9" d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
+        <path fill="url(#creamGradient)" filter="url(#shadow)" d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
       c0-5.143,0-15.427,0-20.568c0-7.333,0-21.998,0-29.33c0-5.523,0-16.569,0-22.092c0-3.295,0-9.885,0-13.181
       C95.188,2.551,97.353,0,100,0c2.648,0,4.812,2.551,4.812,5.669c0,3.248,0,9.743,0,12.991c0,5.428,0,16.284,0,21.711
       c0,7.618,0,22.854,0,30.472c0,4.952,0,14.854,0,19.807C104.812,96.292,104.812,107.576,104.812,113.216z">
@@ -280,11 +853,505 @@
       c-7.606-0.447-6.058-37.895-20.62-23.333c-10.167,10.166-15.972-0.747-25,12C119.547,443.568,121.798,416.515,111.547,415.233z
                               " />
         </path>
-        <rect x="10" y="475.571" fill="#fefae9" width="180" height="4" />
+        <rect x="10" y="475.571" fill="url(#creamGradient)" filter="url(#shadow)" width="180" height="4" />
       </svg>
+      
+      <!-- Instruction text -->
+      <div class="instruction">🎵 Nhấn vào chiếc bánh kem để phát nhạc sinh nhật! 🎂</div>
+      
       <div class="text">
-      <h1>happy birthday!</h1>
-      <p class="name">Lovie</p>
+      <h1>🎉 Happy Birthday! 🎉</h1>
+      <p class="name">✨ Lovie ✨</p>
       </div>
+
+      <script>
+        // Music control - Play only when cake is clicked
+        const music = document.getElementById('birthdayMusic');
+        let musicPlaying = false;
+        
+        function playBirthdayMusic() {
+          music.volume = 0.8;
+          music.currentTime = 0;
+          
+          const playPromise = music.play();
+          
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              console.log('🎵 Birthday music started playing!');
+              musicPlaying = true;
+              // Update instruction text
+              const instruction = document.querySelector('.instruction');
+              instruction.innerHTML = '🎵 Nhạc sinh nhật đang phát! Cảm ơn bạn! 🎂✨';
+              instruction.style.color = '#8A2BE2';
+              
+              // Start musical notes animation
+              startMusicalNotes();
+            }).catch(error => {
+              console.log('Failed to play music:', error);
+            });
+          }
+        }
+        
+        function toggleMusic() {
+          if (musicPlaying && !music.paused) {
+            // Stop music completely
+            music.pause();
+            music.currentTime = 0; // Reset to beginning
+            musicPlaying = false;
+            console.log('🔇 Music stopped completely');
+            
+            // Update instruction text
+            document.querySelector('.instruction').innerHTML = '🎵 Nhấn vào chiếc bánh kem để phát nhạc sinh nhật! 🎂';
+            document.querySelector('.instruction').style.color = '#9370DB';
+            
+            // Stop all musical effects
+            stopMusicalNotes();
+          } else {
+            console.log('🎵 Starting music...');
+            playBirthdayMusic();
+          }
+        }
+
+        // Musical notes animation functions
+        let musicalNotesInterval;
+        let musicalWaveInterval;
+        let longWaveInterval;
+        let pianoSheetInterval;
+
+        function createMusicalNote() {
+          const notes = ['♪', '♫', '♬', '♩', '♭', '♯', '𝄞'];
+          const note = document.createElement('div');
+          note.className = 'music-note';
+          note.innerHTML = notes[Math.floor(Math.random() * notes.length)];
+          
+          // Position around the cake area
+          const cakeArea = document.getElementById('cake').getBoundingClientRect();
+          note.style.left = (cakeArea.left + Math.random() * cakeArea.width) + 'px';
+          note.style.top = (cakeArea.top + cakeArea.height/2) + 'px';
+          
+          // Random colors for notes
+          const colors = ['#8e0038', '#b8004f', '#d12d5a', '#ff6b9d', '#ff8fab'];
+          note.style.color = colors[Math.floor(Math.random() * colors.length)];
+          
+          // Random animation duration with smooth easing
+          const duration = (Math.random() * 2 + 4) + 's';
+          note.style.animation = `floatNote ${duration} cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
+          note.style.animationDelay = Math.random() * 0.8 + 's';
+          
+          document.getElementById('musicalNotes').appendChild(note);
+          
+          setTimeout(() => {
+            if (note.parentNode) {
+              note.remove();
+            }
+          }, 5000);
+        }
+
+        function createPianoSheet() {
+          console.log('🎼 Creating piano sheet with staff lines...');
+          const sheet = document.createElement('div');
+          sheet.className = 'piano-sheet';
+          
+          // Create piano sheet with staff lines
+          const uniqueId = 'pianoSheet_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+          sheet.innerHTML = `
+            <svg viewBox="0 0 120 30" preserveAspectRatio="none" width="100%" height="100%">
+              <defs>
+                <linearGradient id="${uniqueId}" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#8e0038;stop-opacity:0"/>
+                  <stop offset="20%" style="stop-color:#ff6b9d;stop-opacity:0.9"/>
+                  <stop offset="50%" style="stop-color:#ff8fab;stop-opacity:1"/>
+                  <stop offset="80%" style="stop-color:#b8004f;stop-opacity:0.9"/>
+                  <stop offset="100%" style="stop-color:#8e0038;stop-opacity:0"/>
+                </linearGradient>
+              </defs>
+              <!-- Staff lines (5 lines like piano sheet) -->
+              <path d="M0,6 Q20,4 40,6 Q60,8 80,6 Q100,4 120,6" 
+                    stroke="url(#${uniqueId})" 
+                    stroke-width="2" 
+                    fill="none" 
+                    opacity="1"/>
+              <path d="M0,10 Q20,8 40,10 Q60,12 80,10 Q100,8 120,10" 
+                    stroke="url(#${uniqueId})" 
+                    stroke-width="2" 
+                    fill="none" 
+                    opacity="0.9"/>
+              <path d="M0,14 Q20,12 40,14 Q60,16 80,14 Q100,12 120,14" 
+                    stroke="url(#${uniqueId})" 
+                    stroke-width="2" 
+                    fill="none" 
+                    opacity="1"/>
+              <path d="M0,18 Q20,16 40,18 Q60,20 80,18 Q100,16 120,18" 
+                    stroke="url(#${uniqueId})" 
+                    stroke-width="2" 
+                    fill="none" 
+                    opacity="0.9"/>
+              <path d="M0,22 Q20,20 40,22 Q60,24 80,22 Q100,20 120,22" 
+                    stroke="url(#${uniqueId})" 
+                    stroke-width="2" 
+                    fill="none" 
+                    opacity="1"/>
+            </svg>
+          `;
+          
+          // Position above the cake, spanning more width
+          sheet.style.position = 'fixed';
+          sheet.style.left = '5%';
+          sheet.style.top = '80px';
+          sheet.style.width = '90vw';
+          sheet.style.height = '100px';
+          sheet.style.zIndex = '95';
+          sheet.style.pointerEvents = 'none';
+          
+          document.getElementById('musicalNotes').appendChild(sheet);
+          console.log('🎼 Piano sheet added to DOM');
+          
+          // Add notes on the staff
+          setTimeout(() => createNotesOnStaff(sheet), 300);
+          
+          setTimeout(() => {
+            if (sheet.parentNode) {
+              sheet.remove();
+              console.log('🎼 Piano sheet removed');
+            }
+          }, 5000);
+        }
+
+        function createNotesOnStaff(sheetElement) {
+          const notes = ['♪', '♫', '♬', '♩', '𝄞', '𝄢', '♭', '♯'];
+          const colors = ['#8e0038', '#ff6b9d', '#ff8fab', '#b8004f', '#d12d5a'];
+          
+          console.log('🎵 Creating notes on staff...');
+          
+          for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+              const note = document.createElement('div');
+              note.className = 'staff-note';
+              note.innerHTML = notes[Math.floor(Math.random() * notes.length)];
+              note.style.color = colors[Math.floor(Math.random() * colors.length)];
+              note.style.fontSize = '1.8rem';
+              note.style.fontWeight = 'bold';
+              note.style.textShadow = '0 0 12px currentColor, 0 0 24px currentColor';
+              note.style.position = 'fixed';
+              
+              // Position notes across the screen width
+              note.style.left = (10 + i * 10) + '%';
+              note.style.top = (90 + Math.random() * 80) + 'px';
+              note.style.zIndex = '96';
+              note.style.animation = 'staffNoteMove 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards';
+              note.style.animationDelay = (i * 0.2) + 's';
+              
+              document.getElementById('musicalNotes').appendChild(note);
+              console.log(`🎵 Note ${i + 1} created: ${note.innerHTML}`);
+              
+              setTimeout(() => {
+                if (note.parentNode) {
+                  note.remove();
+                }
+              }, 5500);
+            }, i * 200);
+          }
+        }
+
+        function createMusicalWave() {
+          const wave = document.createElement('div');
+          wave.className = 'music-wave';
+          
+          // Create SVG wave path
+          wave.innerHTML = `
+            <svg viewBox="0 0 200 100">
+              <path d="M10,50 Q30,20 50,50 T90,50 T130,50 T170,50 T210,50" 
+                    stroke="#ff6b9d" 
+                    stroke-width="3" 
+                    fill="none" 
+                    opacity="0.8">
+                <animate attributeName="stroke" 
+                         values="#ff6b9d;#8e0038;#b8004f;#ff6b9d" 
+                         dur="2s" 
+                         repeatCount="1"/>
+              </path>
+              <circle r="3" fill="#8e0038">
+                <animateMotion dur="3s" repeatCount="1">
+                  <mpath href="#path"/>
+                </animateMotion>
+              </circle>
+            </svg>
+          `;
+          
+          // Position above the cake
+          const cakeArea = document.getElementById('cake').getBoundingClientRect();
+          wave.style.left = (cakeArea.left + cakeArea.width/2 - 100) + 'px';
+          wave.style.top = (cakeArea.top - 50) + 'px';
+          
+          document.getElementById('musicalNotes').appendChild(wave);
+          
+          setTimeout(() => {
+            if (wave.parentNode) {
+              wave.remove();
+            }
+          }, 3000);
+        }
+
+        function createLongMusicalWave() {
+          const longWave = document.createElement('div');
+          longWave.className = 'music-wave-long';
+          
+          // Create long flowing wave SVG with unique gradient ID
+          const uniqueId = 'waveGradient_' + Date.now();
+          longWave.innerHTML = `
+            <svg viewBox="0 0 100 12" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="${uniqueId}" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#8e0038;stop-opacity:0.9"/>
+                  <stop offset="25%" style="stop-color:#ff6b9d;stop-opacity:1"/>
+                  <stop offset="50%" style="stop-color:#ff8fab;stop-opacity:1"/>
+                  <stop offset="75%" style="stop-color:#b8004f;stop-opacity:1"/>
+                  <stop offset="100%" style="stop-color:#8e0038;stop-opacity:0.9"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,6 Q10,2 20,6 Q30,10 40,6 Q50,2 60,6 Q70,10 80,6 Q90,2 100,6" 
+                    stroke="url(#${uniqueId})" 
+                    stroke-width="3" 
+                    fill="none" 
+                    opacity="1">
+                <animate attributeName="stroke-width" 
+                         values="3;6;3" 
+                         dur="2s" 
+                         repeatCount="indefinite"/>
+                <animate attributeName="opacity" 
+                         values="0.8;1;0.8" 
+                         dur="1.5s" 
+                         repeatCount="indefinite"/>
+              </path>
+            </svg>
+          `;
+          
+          // Position above the cake, spanning full width
+          const cakeArea = document.getElementById('cake').getBoundingClientRect();
+          longWave.style.left = '0px';
+          longWave.style.top = (cakeArea.top - 80) + 'px';
+          longWave.style.width = '100vw';
+          longWave.style.height = '120px';
+          longWave.style.zIndex = '100';
+          
+          document.getElementById('musicalNotes').appendChild(longWave);
+          
+          // Create flowing notes on the wave
+          setTimeout(() => createFlowingNotes(longWave), 500);
+          
+          setTimeout(() => {
+            if (longWave.parentNode) {
+              longWave.remove();
+            }
+          }, 6000);
+        }
+
+        function createFlowingNotes(waveElement) {
+          const notes = ['♪', '♫', '♬', '♩', '♭', '♯', '𝄞', '𝄢'];
+          const colors = ['#8e0038', '#ff6b9d', '#ff8fab', '#b8004f', '#d12d5a'];
+          
+          for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+              const note = document.createElement('div');
+              note.className = 'wave-note';
+              note.innerHTML = notes[Math.floor(Math.random() * notes.length)];
+              note.style.color = colors[Math.floor(Math.random() * colors.length)];
+              note.style.textShadow = '0 0 10px currentColor';
+              note.style.fontSize = '1.5rem';
+              note.style.fontWeight = 'bold';
+              
+              // Position on the wave
+              note.style.left = '0px';
+              note.style.top = '180px';
+              note.style.animationDelay = (i * 0.3) + 's';
+              note.style.zIndex = '101';
+              
+              document.getElementById('musicalNotes').appendChild(note);
+              
+              setTimeout(() => {
+                if (note.parentNode) {
+                  note.remove();
+                }
+              }, 5000);
+            }, i * 200);
+          }
+        }
+
+        // Test function to create wave immediately (for debugging)
+        function testCreateWave() {
+          createLongMusicalWave();
+          console.log('Test wave created!');
+        }
+
+        function startMusicalNotes() {
+          // Only start when music is actually playing
+          if (!musicPlaying) return;
+          
+          console.log('🎵 Starting musical notes and piano sheets!');
+          
+          // Create notes every 800ms
+          musicalNotesInterval = setInterval(() => {
+            if (musicPlaying && !music.paused) {
+              createMusicalNote();
+            }
+          }, 800);
+          
+          // Create piano sheets every 3 seconds
+          pianoSheetInterval = setInterval(() => {
+            if (musicPlaying && !music.paused) {
+              console.log('🎼 Creating piano sheet...');
+              createPianoSheet();
+            }
+          }, 3000);
+          
+          // Create initial piano sheet immediately
+          setTimeout(() => {
+            if (musicPlaying && !music.paused) {
+              console.log('🎼 Creating initial piano sheet...');
+              createPianoSheet();
+            }
+          }, 500);
+        }
+
+        function stopMusicalNotes() {
+          console.log('🔇 Stopping all musical effects with fade out...');
+          
+          // Clear all intervals first
+          if (musicalNotesInterval) {
+            clearInterval(musicalNotesInterval);
+            musicalNotesInterval = null;
+          }
+          if (pianoSheetInterval) {
+            clearInterval(pianoSheetInterval);
+            pianoSheetInterval = null;
+          }
+          
+          // Apply fade out animations to existing elements
+          const musicalContainer = document.getElementById('musicalNotes');
+          if (musicalContainer) {
+            const pianoSheets = musicalContainer.querySelectorAll('.piano-sheet');
+            const musicNotes = musicalContainer.querySelectorAll('.music-note');
+            const staffNotes = musicalContainer.querySelectorAll('.staff-note');
+            
+            // Fade out piano sheets
+            pianoSheets.forEach(sheet => {
+              sheet.classList.add('fade-out-sheet');
+            });
+            
+            // Fade out music notes
+            musicNotes.forEach(note => {
+              note.classList.add('fade-out-music');
+            });
+            
+            // Fade out staff notes
+            staffNotes.forEach(note => {
+              note.classList.add('fade-out-music');
+            });
+            
+            // Clear all elements after fade out animation completes
+            setTimeout(() => {
+              musicalContainer.innerHTML = '';
+              console.log('🔇 All musical effects cleared after fade out');
+            }, 2000); // Wait for longest animation (2s)
+          }
+          
+          console.log('🔇 Fade out animations applied');
+        }
+
+        // Create flying hearts
+        function createHeart() {
+          const heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.innerHTML = Math.random() > 0.5 ? '💖' : '💝';
+          heart.style.left = Math.random() * 100 + '%';
+          heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+          document.getElementById('flyingHearts').appendChild(heart);
+          
+          setTimeout(() => {
+            heart.remove();
+          }, 8000);
+        }
+
+        // Create falling blossoms
+        function createBlossom() {
+          const blossom = document.createElement('div');
+          blossom.className = 'blossom';
+          blossom.innerHTML = '🌸';
+          blossom.style.left = Math.random() * 100 + '%';
+          blossom.style.animationDuration = (Math.random() * 2 + 4) + 's';
+          document.getElementById('fallingBlossoms').appendChild(blossom);
+          
+          setTimeout(() => {
+            blossom.remove();
+          }, 6000);
+        }
+
+        // Create twinkling stars
+        function createStar() {
+          const star = document.createElement('div');
+          star.className = 'star';
+          star.innerHTML = '⭐';
+          star.style.left = Math.random() * 100 + '%';
+          star.style.top = Math.random() * 100 + '%';
+          star.style.animationDelay = Math.random() * 2 + 's';
+          document.getElementById('stars').appendChild(star);
+          
+          setTimeout(() => {
+            star.remove();
+          }, 3000);
+        }
+
+        // Create sparkle effect on cake click
+        function createSparkle(x, y) {
+          for (let i = 0; i < 15; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = Math.random() > 0.5 ? '✨' : '⭐';
+            sparkle.style.left = (x + (Math.random() - 0.5) * 100) + 'px';
+            sparkle.style.top = (y + (Math.random() - 0.5) * 100) + 'px';
+            sparkle.style.animationDelay = (Math.random() * 0.5) + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+              sparkle.remove();
+            }, 1000);
+          }
+        }
+
+        // Add click event to cake - Toggle music and create sparkles
+        document.getElementById('cake').addEventListener('click', function(e) {
+          const rect = e.target.getBoundingClientRect();
+          const x = e.clientX;
+          const y = e.clientY;
+          
+          console.log('🍰 Cake clicked! Toggling music and effects...');
+          
+          // Toggle music instead of just playing
+          toggleMusic();
+          
+          // Create sparkle effect
+          createSparkle(x, y);
+        });
+
+        // Add click event to instruction text
+        document.querySelector('.instruction').addEventListener('click', function() {
+          console.log('📝 Instruction clicked - toggling music...');
+          toggleMusic();
+        });
+
+        // Test functions for debugging
+        window.testPianoSheet = function() {
+          console.log('🧪 Testing piano sheet creation...');
+          createPianoSheet();
+        };
+        
+        // Start animations
+        setInterval(createHeart, 800);
+        setInterval(createBlossom, 1200);
+        setInterval(createStar, 2000);
+      </script>
+      
+      <!-- External Scripts -->
+      <script src="utils.js"></script>
   </body>
 </html>

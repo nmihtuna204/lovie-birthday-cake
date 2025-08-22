@@ -1,0 +1,48 @@
+{
+  "name": "birthday-cake-lovie",
+  "version": "2.0.0",
+  "description": "Beautiful birthday cake website with piano sheet music animations for Lovie",
+  "main": "birthday-cake.html",
+  "scripts": {
+    "start": "start birthday-cake.html",
+    "serve": "python -m http.server 3000",
+    "lint": "echo 'No linting configured'",
+    "test": "echo 'No tests configured'"
+  },
+  "keywords": [
+    "birthday",
+    "cake",
+    "animation", 
+    "music",
+    "piano",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "The coding Wizard",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codetoanbug/birthday-cake.git"
+  },
+  "files": [
+    "birthday-cake.html",
+    "styles.css",
+    "utils.js",
+    "hpbd.mp3",
+    "hpbd.wav", 
+    "hpbd.ogg",
+    "image.png",
+    "README.md"
+  ],
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

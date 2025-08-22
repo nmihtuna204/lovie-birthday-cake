@@ -1,0 +1,144 @@
+/* 
+ * Birthday Cake Website - External Styles
+ * Additional styles and utilities
+ */
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(45deg, #ffb3e6, #ff99cc);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #8e0038, #ff6b9d);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #b8004f, #ff8fab);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(255, 107, 157, 0.3);
+  color: #8e0038;
+}
+
+/* Additional hover effects */
+.cake:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+.instruction:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 4px 8px rgba(142, 0, 56, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Loading animation */
+@keyframes loadingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.loading {
+  animation: loadingPulse 1.5s infinite;
+}
+
+/* Print styles */
+@media print {
+  .flying-hearts,
+  .falling-blossoms,
+  .stars,
+  .musical-notes {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+  }
+  
+  .main-title,
+  .sub-title {
+    color: #8e0038 !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .main-title,
+  .sub-title,
+  .instruction {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .heart,
+  .blossom,
+  .star,
+  .music-note,
+  .piano-sheet,
+  .staff-note {
+    animation: none !important;
+  }
+}
+
+/* Focus styles for accessibility */
+.cake:focus,
+.instruction:focus {
+  outline: 3px solid #ff6b9d;
+  outline-offset: 2px;
+}
+
+/* Additional utility classes */
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.bounce-in {
+  animation: bounceIn 0.8s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+  .piano-sheet {
+    width: 95vw !important;
+    left: 2.5% !important;
+  }
+  
+  .staff-note {
+    font-size: 1.2rem !important;
+  }
+  
+  .music-note {
+    font-size: 1.5rem !important;
+  }
+}
