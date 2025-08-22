@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday - Lovie 🎂</title>
-    <meta name="description" content="Beautiful birthday cake website with piano sheet music animations for Lovie">
-    <meta name="keywords" content="birthday, cake, music, piano, animation, lovie">
-    <meta name="author" content="The coding Wizard">
+    <title>Happy Birthday - Vân Anh 🎂</title>
+    <meta name="description" content="Beautiful birthday cake website with piano sheet music animations for Vân Anh">
+    <meta name="keywords" content="birthday, cake, music, piano, animation, vân anh">
+    <meta name="author" content="Minh Tuấn">
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#8e0038">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Lovie Birthday">
+    <meta name="apple-mobile-web-app-title" content="Vân Anh Birthday">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="image.png">
@@ -371,6 +371,61 @@
         }
       }
 
+      /* From signature in corner */
+      .from-signature {
+        position: fixed;
+        bottom: 15px;
+        right: 75px;
+        font-family: 'Dancing Script', cursive;
+        font-size: 0.9rem;
+        color: #8e0038;
+        font-weight: 400;
+        text-shadow: 0 0 10px rgba(142, 0, 56, 0.5);
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        opacity: 0.9;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 8px 12px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: softPulse 3s infinite;
+      }
+
+      .from-signature .heart-icon {
+        font-size: 1rem;
+        color: #ff6b9d;
+        animation: heartbeat 2s infinite;
+      }
+
+      @keyframes softPulse {
+        0%, 100% {
+          opacity: 0.8;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.02);
+        }
+      }
+
+      @keyframes heartbeat {
+        0%, 100% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(1.1);
+        }
+        50% {
+          transform: scale(1);
+        }
+        75% {
+          transform: scale(1.1);
+        }
+      }
+
       /* Musical notes animation */
       .musical-notes {
         position: fixed;
@@ -671,6 +726,12 @@
       <div class="corner-decoration bottom-left">⭐</div>
       <div class="corner-decoration bottom-right">🎀</div>
 
+      <!-- From signature -->
+      <div class="from-signature">
+        <span class="heart-icon">💝</span>
+        <span>From Minh Tuấn with love</span>
+      </div>
+
       <!-- Flying hearts -->
       <div class="flying-hearts" id="flyingHearts"></div>
 
@@ -861,7 +922,7 @@
       
       <div class="text">
       <h1>🎉 Happy Birthday! 🎉</h1>
-      <p class="name">✨ Lovie ✨</p>
+      <p class="name">✨ Vân Anh ✨</p>
       </div>
 
       <script>
