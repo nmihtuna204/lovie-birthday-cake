@@ -662,37 +662,37 @@
         }
         12% {
           opacity: 0.8;
-          transform: translate3d(2vw, -5px, 0) scale(0.9) rotate(8deg);
+          transform: translate3d(2vw, 2px, 0) scale(0.9) rotate(8deg);
           filter: blur(0.5px);
         }
         25% {
           opacity: 1;
-          transform: translate3d(18vw, -10px, 0) scale(1) rotate(15deg);
+          transform: translate3d(18vw, -2px, 0) scale(1) rotate(15deg);
           filter: blur(0px);
         }
         40% {
           opacity: 1;
-          transform: translate3d(35vw, -8px, 0) scale(1.05) rotate(25deg);
+          transform: translate3d(35vw, 1px, 0) scale(1.05) rotate(25deg);
         }
         55% {
           opacity: 0.95;
-          transform: translate3d(50vw, -12px, 0) scale(1.1) rotate(35deg);
+          transform: translate3d(50vw, -1px, 0) scale(1.1) rotate(35deg);
         }
         70% {
           opacity: 0.85;
-          transform: translate3d(65vw, -10px, 0) scale(1.05) rotate(45deg);
+          transform: translate3d(65vw, 2px, 0) scale(1.05) rotate(45deg);
         }
         85% {
           opacity: 0.6;
-          transform: translate3d(78vw, -15px, 0) scale(0.95) rotate(55deg);
+          transform: translate3d(78vw, 0px, 0) scale(0.95) rotate(55deg);
         }
         95% {
           opacity: 0.3;
-          transform: translate3d(90vw, -12px, 0) scale(0.8) rotate(65deg);
+          transform: translate3d(90vw, -1px, 0) scale(0.8) rotate(65deg);
         }
         100% {
           opacity: 0;
-          transform: translate3d(102vw, -20px, 0) scale(0.6) rotate(75deg);
+          transform: translate3d(102vw, 1px, 0) scale(0.6) rotate(75deg);
           filter: blur(0.5px);
         }
       }
@@ -1119,6 +1119,10 @@
           
           console.log('🎵 Creating notes on staff...');
           
+          // Staff lines positions relative to piano sheet (5 lines, each about 4px apart)
+          const staffLinePositions = [86, 90, 94, 98, 102]; // On the 5 staff lines
+          const notePositions = [84, 86, 88, 90, 92, 94, 96, 98, 100, 102, 104, 106]; // On and between lines
+          
           for (let i = 0; i < 12; i++) {
             setTimeout(() => {
               const note = document.createElement('div');
@@ -1132,7 +1136,8 @@
               
               // Position notes across the screen width
               note.style.left = (5 + i * 8) + '%';
-              note.style.top = (90 + Math.random() * 80) + 'px';
+              // Use precise staff line positions instead of random
+              note.style.top = notePositions[Math.floor(Math.random() * notePositions.length)] + 'px';
               note.style.zIndex = '96';
               note.style.animation = 'staffNoteMove 7s cubic-bezier(0.23, 1, 0.32, 1) forwards';
               note.style.animationDelay = (i * 0.15) + 's';
@@ -1141,7 +1146,7 @@
               note.style.transform = 'translate3d(0,0,0)';
               
               document.getElementById('musicalNotes').appendChild(note);
-              console.log(`🎵 Note ${i + 1} created: ${note.innerHTML}`);
+              console.log(`🎵 Note ${i + 1} created: ${note.innerHTML} at ${note.style.top}`);
               
               setTimeout(() => {
                 if (note.parentNode) {
@@ -1249,6 +1254,9 @@
           const notes = ['♪', '♫', '♬', '♩', '♭', '♯', '𝄞', '𝄢'];
           const colors = ['#8e0038', '#ff6b9d', '#ff8fab', '#b8004f', '#d12d5a'];
           
+          // Staff line positions to align with piano sheet
+          const staffPositions = [86, 90, 94, 98, 102, 106]; // On staff lines and spaces
+          
           for (let i = 0; i < 10; i++) {
             setTimeout(() => {
               const note = document.createElement('div');
@@ -1259,9 +1267,9 @@
               note.style.fontSize = '1.5rem';
               note.style.fontWeight = 'bold';
               
-              // Position on the wave
+              // Position on the wave - align with staff lines
               note.style.left = '0px';
-              note.style.top = '180px';
+              note.style.top = staffPositions[Math.floor(Math.random() * staffPositions.length)] + 'px';
               note.style.animationDelay = (i * 0.2) + 's';
               note.style.zIndex = '101';
               
